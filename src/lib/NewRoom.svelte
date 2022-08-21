@@ -1,8 +1,10 @@
 <script>
+  import { isNewRoom } from "../store/store";
+
   let username = "";
   function onSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
+    isNewRoom.set(true);
   }
 
   function isValid(username) {

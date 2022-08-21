@@ -1,9 +1,11 @@
 <script>
+  import { isJoinRoom } from "../store/store";
+
   let username = "";
   let roomID = "";
   function onSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
+    isJoinRoom.set(true);
   }
 
   function isValid(roomID) {
