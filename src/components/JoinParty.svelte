@@ -4,7 +4,7 @@
   import Youtube from "../lib/Youtube.svelte";
 </script>
 
-<p>Join Party</p>
+<p>Join</p>
 
 <!-- <hr /> -->
 <!-- <Youtube
