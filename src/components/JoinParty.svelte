@@ -4,15 +4,13 @@
   let player1State;
   import Youtube from "../lib/Youtube.svelte";
   import { currentTimeLine } from "../store/store";
-
+  let playStatus = true;
   let currentTime = 0;
 
   currentTimeLine.subscribe((value) => {
     currentTime = value;
   });
 </script>
-
-<!-- <p>Join</p> -->
 
 <hr />
 
@@ -21,9 +19,33 @@
   on:PlayerStateChangeString={({ detail }) => (player1State = detail)}
   bind:this={player1}
 /><br />
-<button on:click={() => player1.play()}> play v1 </button>
-<!-- <button on:click={() => player1.seekTo(582.736988, true)}> Seekto </button> -->
-<input type="range" value={currentTime} on:change />
+<!-- <button on:click={() => player1.play()}>. </button> -->
+<div class="video-controller">
+  {#if playStatus}
+    <button
+      on:click={() => {
+        player1.play();
+        playStatus = false;
+      }}
+      class="button play"
+    >
+      ▶️</button
+    >
+  {:else}
+    <button
+      on:click={() => {
+        player1.pause();
+        playStatus = true;
+      }}
+      class="button pause">⏸</button
+    >
+  {/if}
+  <input
+    type="range"
+    value={currentTime}
+    on:change={(e) => player1.seekTo(e.target.value / 100, true)}
+  />
+</div>
 
 <!-- Player 1 State: {player1State} -->
 <style>

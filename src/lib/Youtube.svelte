@@ -25,20 +25,22 @@
   export function play() {
     player.playVideo();
   }
+  export function pause() {
+    player.pauseVideo();
+  }
   export function seekTo(time, allowSeekAhead) {
-    // player.seekTo(time, allowSeekAhead);
-    console.log((player.getCurrentTime / player.getDuration) * 100);
+    let newTime = time * player.getDuration();
+    player.seekTo(newTime, allowSeekAhead);
   }
   function updateTime() {
     // return (player.getCurrentTime / player.getDuration) * 100;
     let currentTime = (player.getCurrentTime() / player.getDuration()) * 100;
-    console.log("current Time:", currentTime);
     currentTimeLine.update((n) => (n = currentTime));
   }
 
   const dispatch = createEventDispatcher();
   window.addEventListener("iframeApiReady", function (e) {
-    console.log("yo", divId);
+    // console.log("yo", divId);
     player = new YT.Player(divId, {
       height: "390",
       width: "640",
@@ -51,7 +53,7 @@
   });
   function playerStateChange({ data }) {
     dispatch("PlayerStateChange", data);
-    console.log(data);
+    // console.log(data);
     let strReturn = "";
     if (data == -1) {
       strReturn = "(unstarted)";
