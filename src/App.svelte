@@ -14,10 +14,12 @@
   });
 </script>
 
-{#if joinRoom}
+<!-- {#if joinRoom}
   <JoinParty />
 {:else if newRoom}
   <NewParty />
 {:else}
   <Home />
-{/if}
+{/if} -->
+
+<JoinParty />

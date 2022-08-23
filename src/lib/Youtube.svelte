@@ -1,4 +1,5 @@
-<script context="module">
+<script>
+  // @ts-nocheck
   let iframeApiReady = false;
 
   import { setContext, onMount } from "svelte";
@@ -7,21 +8,34 @@
   var firstScriptTag = document.getElementsByTagName("script")[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  window.onYouTubeIframeAPIReady = () =>
-    window.dispatchEvent(new Event("iframeApiReady"));
-</script>
-
-<script>
-  // @ts-nocheck
+  // @ts-ignore
+  onMount(async () => {
+    window.onYouTubeIframeAPIReady = () =>
+      window.dispatchEvent(new Event("iframeApiReady"));
+  });
 
   import { createEventDispatcher } from "svelte";
   import { getContext } from "svelte";
+  import { currentTimeLine } from "../store/store";
+
   export let videoId;
+
   let player;
   let divId = "player_" + parseInt(Math.random() * 109999);
   export function play() {
     player.playVideo();
   }
+  export function seekTo(time, allowSeekAhead) {
+    // player.seekTo(time, allowSeekAhead);
+    console.log((player.getCurrentTime / player.getDuration) * 100);
+  }
+  function updateTime() {
+    // return (player.getCurrentTime / player.getDuration) * 100;
+    let currentTime = (player.getCurrentTime() / player.getDuration()) * 100;
+    console.log("current Time:", currentTime);
+    currentTimeLine.update((n) => (n = currentTime));
+  }
+
   const dispatch = createEventDispatcher();
   window.addEventListener("iframeApiReady", function (e) {
     console.log("yo", divId);
@@ -60,10 +74,11 @@
     dispatch("PlayerStateChangeString", strReturn);
   }
   function playerIsReady() {
+    updateTime();
     dispatch("Ready");
     setInterval(() => {
       dispatch("currentPlayTime", player.getCurrentTime());
-      //console.log(player.getCurrentTime())
+      updateTime();
     }, 1000);
   }
 </script>
