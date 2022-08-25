@@ -21,6 +21,13 @@
 /><br />
 <!-- <button on:click={() => player1.play()}>. </button> -->
 <div class="video-controller">
+  <button
+    on:click={() => {
+      player1.pause();
+      playStatus = true;
+    }}
+    class="button pause">⏮</button
+  >
   {#if playStatus}
     <button
       on:click={() => {
@@ -40,6 +47,13 @@
       class="button pause">⏸</button
     >
   {/if}
+  <button
+    on:click={() => {
+      player1.pause();
+      playStatus = true;
+    }}
+    class="button pause">⏭</button
+  >
   <input
     type="range"
     value={currentTime}
