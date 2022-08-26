@@ -1,11 +1,13 @@
 <script>
   import { isJoinRoom } from "../store/store";
+  // import { socket } from "../store/socketio";
 
   let username = "";
   let roomID = "";
   function onSubmit(e) {
     e.preventDefault();
     isJoinRoom.set(true);
+    // socket.emit("message", { data: "hello" });
   }
 
   function isValid(roomID) {
