@@ -76,7 +76,7 @@
     justify-content: center;
     align-content: center;
     min-height: 60%;
-    min-height: 60vh;
+    min-height: 40vh;
   }
 
   .container {
