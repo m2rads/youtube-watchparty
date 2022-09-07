@@ -1,4 +1,6 @@
 <script>
+  // @ts-nocheck
+
   // import "./timeline.css";
   let player1;
   let player1State;
