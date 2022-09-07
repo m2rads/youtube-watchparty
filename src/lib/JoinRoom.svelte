@@ -2,20 +2,24 @@
   import { isJoinRoom } from "../store/store";
   import { socket } from "../store/socketio";
 
-  socket.on("join_room", (data) => {
-    console.log(data);
+  let join_status;
+  socket.on("join_status", (data) => {
+    console.log("error", data);
+    join_status = data.status;
+    if (join_status == 200) isJoinRoom.set(true);
+    else isJoinRoom.set(false);
   });
 
   let username = "";
   let roomID = "";
+
   function onSubmit(e) {
     e.preventDefault();
-    isJoinRoom.set(true);
-    socket.emit("join_room", { username: username, roomID: roomID });
+    socket.emit("join_room", { username: username, roomId: roomID });
   }
 
   function isValid(roomID) {
-    if (roomID.length < 8) {
+    if (roomID.length < 4) {
       return true;
     } else false;
   }

@@ -44,7 +44,7 @@
 
           {#if showJoinRoom}
             <hr />
-            <JoinRoom />
+            <NewRoom />
           {/if}
         </div>
         <div class="new">
