@@ -8,7 +8,6 @@
   var firstScriptTag = document.getElementsByTagName("script")[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  // @ts-ignore
   onMount(async () => {
     window.onYouTubeIframeAPIReady = () =>
       window.dispatchEvent(new Event("iframeApiReady"));
@@ -56,22 +55,22 @@
     // console.log(data);
     let strReturn = "";
     if (data == -1) {
-      strReturn = "(unstarted)";
+      strReturn = "unstarted";
     }
     if (data == 0) {
-      strReturn = "(ended)";
+      strReturn = "ended";
     }
     if (data == 1) {
-      strReturn = "(playing)";
+      strReturn = "playing";
     }
     if (data == 2) {
-      strReturn = "(paused)";
+      strReturn = "paused";
     }
     if (data == 3) {
-      strReturn = "(buffering)";
+      strReturn = "buffering";
     }
     if (data == 5) {
-      strReturn = "(video cued).";
+      strReturn = "video cued";
     }
     dispatch("PlayerStateChangeString", strReturn);
   }
