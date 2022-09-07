@@ -1,10 +1,12 @@
 <script>
   import { isNewRoom } from "../store/store";
+  import { socket } from "../store/socketio";
 
   let username = "";
   function onSubmit(e) {
     e.preventDefault();
     isNewRoom.set(true);
+    socket.emit("create_room", { username: username });
   }
 
   function isValid(username) {

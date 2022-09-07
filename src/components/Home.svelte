@@ -1,6 +1,15 @@
 <script>
   import JoinRoom from "../lib/JoinRoom.svelte";
   import NewRoom from "../lib/NewRoom.svelte";
+  import { socket } from "../store/socketio";
+
+  socket.on("connected", () => {
+    console.log("connected");
+  });
+
+  socket.on("disconnected", () => {
+    console.log("disconnected");
+  });
 
   let showNewRoom = false;
   let showJoinRoom = false;
