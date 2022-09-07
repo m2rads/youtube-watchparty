@@ -1,7 +1,7 @@
 <script>
   import Home from "./components/Home.svelte";
   import JoinParty from "./components/JoinParty.svelte";
-  import NewParty from "./components/NewParty.svelte";
+  import PartyRoom from "./components/PartyRoom.svelte";
 
   import { isJoinRoom, isNewRoom } from "./store/store";
   let joinRoom, newRoom;
@@ -15,9 +15,9 @@
 </script>
 
 {#if joinRoom}
-  <JoinParty />
+  <PartyRoom />
 {:else if newRoom}
-  <NewParty />
+  <PartyRoom />
 {:else}
   <Home />
 {/if}
